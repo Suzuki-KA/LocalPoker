@@ -46,11 +46,10 @@ public class PokerClient {
                 round.runClientRound(scanner, ois, oos, hand);
 
                 // フラグを受信
-                boolean fold = (boolean) ois.readObject();  // "fold" または "normal"
+                boolean fold = (boolean) ois.readObject();
 
                 // 勝敗結果が通常の勝負によるものであれば受信・表示
                 if (fold) {
-                    // foldによる勝敗 → スキップ or 別メッセージ表示も可
                 } else {
                     String result = (String) ois.readObject();
                     System.out.println("【結果】" + result);
