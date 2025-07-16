@@ -51,7 +51,6 @@ public class PokerClient {
                 // 勝敗結果が通常の勝負によるものであれば受信・表示
                 if (fold) {
                     // foldによる勝敗 → スキップ or 別メッセージ表示も可
-                    System.out.println("相手がフォールドしました。");
                 } else {
                     String result = (String) ois.readObject();
                     System.out.println("【結果】" + result);
