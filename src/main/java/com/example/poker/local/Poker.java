@@ -68,10 +68,18 @@ public class Poker {
         clearTableCards();
         resetBets();
         pot = 0;
+
+        // デッキを新たに生成してシャッフル
+        deck = generateDeck();
+        shuffle(deck);
+
         for (Player player : players) {
             player.hand.clear();
             player.isFolded = false;
         }
+
+        // 手札を配り直す（次のラウンドのため）
+        dealCards();
     }
 
 
@@ -431,13 +439,27 @@ public class Poker {
         }
         currentMaxBet = 0;
     }
-    public void printPlayerStatus() {
+    public String[] printPlayerStatus() {
+        String[] playersStatus = new String[players.size() + 1];
+        int index = 0;
         for (Player player : players) {
-            System.out.println(player.name + ": チップ " + player.chips + ", 現在のベット " + player.currentBet + (player.isFolded ? " (フォールド)" : ""));
+            if(player.isFolded){
+                playersStatus[index] = player.name + ": チップ " + player.chips + ", 現在のベット " + player.currentBet + "（フォールド）";
+            }
+            playersStatus[index] = player.name + ": チップ " + player.chips + ", 現在のベット " + player.currentBet + "";
+            index++;
         }
-        System.out.println("ポット: " + pot);
+        playersStatus[index] = "ポット:" + pot;
+        return playersStatus;
+    }
+    public int getPot() {
+        return pot;
     }
 
+    public void resetPot() {
+        pot = 0;
+    }
+    
 
 
 }

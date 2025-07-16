@@ -55,6 +55,10 @@ public class PokerClient {
                 } else {
                     String result = (String) ois.readObject();
                     System.out.println("【結果】" + result);
+                    String[] chips = (String[]) ois.readObject();
+                    for(String chip: chips){
+                        System.out.println(chip);
+                    }
                 }
 
                 // サーバーの意思を受信
